@@ -84,7 +84,7 @@
             <h1>Intent</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Intent</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Intent</span><span class="p">:</span> <span class="kt">JSONEncodable</span><span class="p">,</span> <span class="kt">JSONDecodable</span></code></pre>
 
                 </div>
               </div>
@@ -97,9 +97,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14ConversationV16Intent6intentSS"></a>
+                    <a name="/s:vV14ConversationV16Intent6intentGSqSS_"></a>
                     <a name="//apple_ref/swift/Property/intent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14ConversationV16Intent6intentSS">intent</a>
+                    <a class="token" href="#/s:vV14ConversationV16Intent6intentGSqSS_">intent</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -114,7 +114,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -124,9 +124,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14ConversationV16Intent10confidenceSd"></a>
+                    <a name="/s:vV14ConversationV16Intent10confidenceGSqSd_"></a>
                     <a name="//apple_ref/swift/Property/confidence" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14ConversationV16Intent10confidenceSd">confidence</a>
+                    <a class="token" href="#/s:vV14ConversationV16Intent10confidenceGSqSd_">confidence</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -141,7 +141,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">confidence</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">confidence</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -175,12 +175,39 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV14ConversationV16Intent6toJSONFT_O6Freddy4JSON"></a>
+                    <a name="//apple_ref/swift/Method/toJSON()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV14ConversationV16Intent6toJSONFT_O6Freddy4JSON">toJSON()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used internally to serialize an <code>Intent</code> model to JSON.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSON</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">JSON</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-11)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-09-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

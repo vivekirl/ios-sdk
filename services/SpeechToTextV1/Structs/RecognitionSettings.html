@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TranscriptionSettings Struct Reference</title>
+    <title>RecognitionSettings Struct Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/TranscriptionSettings" class="dashAnchor"></a>
-    <a title="TranscriptionSettings Struct Reference"></a>
+    <a name="//apple_ref/swift/Struct/RecognitionSettings" class="dashAnchor"></a>
+    <a title="RecognitionSettings Struct Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a></p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        TranscriptionSettings Struct Reference
+        RecognitionSettings Struct Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -33,6 +33,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Classes/SpeechToText.html">SpeechToText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SpeechToTextSession.html">SpeechToTextSession</a>
               </li>
             </ul>
           </li>
@@ -48,22 +51,28 @@
             <a href="../Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/AlternativeResult.html">AlternativeResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AlternativeResults.html">AlternativeResults</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/KeywordResult.html">KeywordResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Transcription.html">Transcription</a>
+                <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TranscriptionResult.html">TranscriptionResult</a>
+                <a href="../Structs/RecognitionSettings.html">RecognitionSettings</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TranscriptionSettings.html">TranscriptionSettings</a>
+                <a href="../Structs/SpeechRecognitionAlternative.html">SpeechRecognitionAlternative</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResult.html">SpeechRecognitionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResult.html">WordAlternativeResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResults.html">WordAlternativeResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/WordConfidence.html">WordConfidence</a>
@@ -78,10 +87,10 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>TranscriptionSettings</h1>
+            <h1>RecognitionSettings</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TranscriptionSettings</span><span class="p">:</span> <span class="kt">JSONEncodable</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RecognitionSettings</span><span class="p">:</span> <span class="kt">JSONEncodable</span></code></pre>
 
                 </div>
               </div>
@@ -98,67 +107,9 @@ parameters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings5modelGSqSS_"></a>
-                    <a name="//apple_ref/swift/Property/model" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings5modelGSqSS_">model</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>URL query parameters for WebSockets connection request. ****</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings14learningOptOutGSqSb_"></a>
-                    <a name="//apple_ref/swift/Property/learningOptOut" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings14learningOptOutGSqSb_">learningOptOut</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>By default, the Speech to Text service logs requests and their results. Logging is
-done only for the purpose of improving the service for future users—the logged data
-is not shared or made public. If you are concerned with protecting the privacy of users&rsquo;
-personal information or otherwise do not want your requests to be logged, you can opt
-out of logging by setting this property to <code>true</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings11contentTypeOS_14AudioMediaType"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings11contentTypeOS_14AudioMediaType"></a>
                     <a name="//apple_ref/swift/Property/contentType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings11contentTypeOS_14AudioMediaType">contentType</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings11contentTypeOS_14AudioMediaType">contentType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -184,9 +135,9 @@ service. Visit <a href="https://ibm.biz/BdHCrB">https://ibm.biz/BdHCrB</a> for m
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings10continuousGSqSb_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings10continuousGSqSb_"></a>
                     <a name="//apple_ref/swift/Property/continuous" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings10continuousGSqSb_">continuous</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings10continuousGSqSb_">continuous</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -212,9 +163,9 @@ than stopping at the first half-second of non-speech. The default is <code>false
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings17inactivityTimeoutGSqSi_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings17inactivityTimeoutGSqSi_"></a>
                     <a name="//apple_ref/swift/Property/inactivityTimeout" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings17inactivityTimeoutGSqSi_">inactivityTimeout</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings17inactivityTimeoutGSqSi_">inactivityTimeout</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -240,9 +191,9 @@ Use <code>-1</code> to set the timeout to infinity. The default is <code>30</cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings8keywordsGSqGSaSS__"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings8keywordsGSqGSaSS__"></a>
                     <a name="//apple_ref/swift/Property/keywords" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings8keywordsGSqGSaSS__">keywords</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings8keywordsGSqGSaSS__">keywords</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -268,9 +219,9 @@ does not perform any keyword spotting.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings17keywordsThresholdGSqSd_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings17keywordsThresholdGSqSd_"></a>
                     <a name="//apple_ref/swift/Property/keywordsThreshold" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings17keywordsThresholdGSqSd_">keywordsThreshold</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings17keywordsThresholdGSqSd_">keywordsThreshold</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -299,9 +250,9 @@ service does not perform any keyword spotting.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings15maxAlternativesGSqSi_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings15maxAlternativesGSqSi_"></a>
                     <a name="//apple_ref/swift/Property/maxAlternatives" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings15maxAlternativesGSqSi_">maxAlternatives</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings15maxAlternativesGSqSi_">maxAlternatives</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -326,9 +277,9 @@ service does not perform any keyword spotting.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings14interimResultsGSqSb_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings14interimResultsGSqSb_"></a>
                     <a name="//apple_ref/swift/Property/interimResults" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings14interimResultsGSqSb_">interimResults</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings14interimResultsGSqSb_">interimResults</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -354,9 +305,9 @@ for the transcription. The default is <code>false</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings25wordAlternativesThresholdGSqSd_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings25wordAlternativesThresholdGSqSd_"></a>
                     <a name="//apple_ref/swift/Property/wordAlternativesThreshold" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings25wordAlternativesThresholdGSqSd_">wordAlternativesThreshold</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings25wordAlternativesThresholdGSqSd_">wordAlternativesThreshold</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -384,9 +335,9 @@ word alternative. By default, the service does not return any word alternatives.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings14wordConfidenceGSqSb_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings14wordConfidenceGSqSb_"></a>
                     <a name="//apple_ref/swift/Property/wordConfidence" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings14wordConfidenceGSqSb_">wordConfidence</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings14wordConfidenceGSqSb_">wordConfidence</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -412,9 +363,9 @@ The default is <code>false</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings10timestampsGSqSb_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings10timestampsGSqSb_"></a>
                     <a name="//apple_ref/swift/Property/timestamps" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings10timestampsGSqSb_">timestamps</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings10timestampsGSqSb_">timestamps</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -440,9 +391,9 @@ be received. The default is <code>false</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV14SpeechToTextV121TranscriptionSettings15filterProfanityGSqSb_"></a>
+                    <a name="/s:vV14SpeechToTextV119RecognitionSettings15filterProfanityGSqSb_"></a>
                     <a name="//apple_ref/swift/Property/filterProfanity" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV14SpeechToTextV121TranscriptionSettings15filterProfanityGSqSb_">filterProfanity</a>
+                    <a class="token" href="#/s:vV14SpeechToTextV119RecognitionSettings15filterProfanityGSqSb_">filterProfanity</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -468,9 +419,9 @@ occurrence with a set of asterisks. The default is <code>true</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FV14SpeechToTextV121TranscriptionSettingscFT11contentTypeOS_14AudioMediaType_S0_"></a>
+                    <a name="/s:FV14SpeechToTextV119RecognitionSettingscFT11contentTypeOS_14AudioMediaType_S0_"></a>
                     <a name="//apple_ref/swift/Method/init(contentType:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV14SpeechToTextV121TranscriptionSettingscFT11contentTypeOS_14AudioMediaType_S0_">init(contentType:)</a>
+                    <a class="token" href="#/s:FV14SpeechToTextV119RecognitionSettingscFT11contentTypeOS_14AudioMediaType_S0_">init(contentType:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -478,7 +429,7 @@ occurrence with a set of asterisks. The default is <code>true</code>.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initialize a <code>TranscriptionSettings</code> object to set the parameters of a Watson Speech to
+                        <p>Initialize a <code>RecognitionSettings</code> object to set the parameters of a Watson Speech to
 Text recognition request.</p>
 
                       </div>
@@ -512,7 +463,7 @@ Text recognition request.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>An initialized <code>TranscriptionSettings</code> object with the given <code><a href="../Structs/TranscriptionSettings.html#/s:vV14SpeechToTextV121TranscriptionSettings11contentTypeOS_14AudioMediaType">contentType</a></code>. Configure additional parameters for the recognition request by directly modifying the returned object&rsquo;s properties.</p>
+                        <p>An initialized <code>RecognitionSettings</code> object with the given <code><a href="../Structs/RecognitionSettings.html#/s:vV14SpeechToTextV119RecognitionSettings11contentTypeOS_14AudioMediaType">contentType</a></code>. Configure additional parameters for the recognition request by directly modifying the returned object&rsquo;s properties.</p>
 
                       </div>
                     </section>
@@ -521,9 +472,9 @@ Text recognition request.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FV14SpeechToTextV121TranscriptionSettings6toJSONFT_O6Freddy4JSON"></a>
+                    <a name="/s:FV14SpeechToTextV119RecognitionSettings6toJSONFT_O6Freddy4JSON"></a>
                     <a name="//apple_ref/swift/Method/toJSON()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV14SpeechToTextV121TranscriptionSettings6toJSONFT_O6Freddy4JSON">toJSON()</a>
+                    <a class="token" href="#/s:FV14SpeechToTextV119RecognitionSettings6toJSONFT_O6Freddy4JSON">toJSON()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -531,7 +482,7 @@ Text recognition request.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Used internally to serialize a <code>TranscriptionSettings</code> model to JSON.</p>
+                        <p>Used internally to serialize a <code>RecognitionSettings</code> model to JSON.</p>
 
                       </div>
                       <div class="declaration">
@@ -550,7 +501,7 @@ Text recognition request.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-11)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-09-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

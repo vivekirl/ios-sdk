@@ -33,6 +33,9 @@
               <li class="nav-group-task">
                 <a href="Classes/SpeechToText.html">SpeechToText</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -47,22 +50,28 @@
             <a href="Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/AlternativeResult.html">AlternativeResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/AlternativeResults.html">AlternativeResults</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/KeywordResult.html">KeywordResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Transcription.html">Transcription</a>
+                <a href="Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TranscriptionResult.html">TranscriptionResult</a>
+                <a href="Structs/RecognitionSettings.html">RecognitionSettings</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TranscriptionSettings.html">TranscriptionSettings</a>
+                <a href="Structs/SpeechRecognitionAlternative.html">SpeechRecognitionAlternative</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SpeechRecognitionResult.html">SpeechRecognitionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WordAlternativeResult.html">WordAlternativeResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WordAlternativeResults.html">WordAlternativeResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/WordConfidence.html">WordConfidence</a>
@@ -87,6 +96,45 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:C14SpeechToTextV119SpeechToTextSession"></a>
+                    <a name="//apple_ref/swift/Class/SpeechToTextSession" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C14SpeechToTextV119SpeechToTextSession">SpeechToTextSession</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
+your application. It uses machine intelligence to combine information about grammar and language
+structure to generate an accurate transcription. Transcriptions are supported for various audio
+formats and languages.</p>
+
+<p>This class enables fine-tuned control of a WebSockets session with the Speech to Text service.
+Although it is a more complex interface than the <code><a href="Classes/SpeechToText.html">SpeechToText</a></code> class, it provides more control
+and customizability of the session.</p>
+
+                        <a href="Classes/SpeechToTextSession.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SpeechToTextSession</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:C14SpeechToTextV112SpeechToText"></a>
                     <a name="//apple_ref/swift/Class/SpeechToText" class="dashAnchor"></a>
                     <a class="token" href="#/s:C14SpeechToTextV112SpeechToText">SpeechToText</a>
@@ -101,6 +149,11 @@
 your application. It uses machine intelligence to combine information about grammar and language
 structure to generate an accurate transcription. Transcriptions are supported for various audio
 formats and languages.</p>
+
+<p>This class makes it easy to recognize audio with the Speech to Text service. Internally, many
+of the functions make use of the <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class, but this class provides a simpler
+interface by minimizing customizability. If you find that you require more control of the session
+or microphone, consider using the <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class instead.</p>
 
                         <a href="Classes/SpeechToText.html" class="slightly-smaller">See more</a>
                       </div>
@@ -120,7 +173,7 @@ formats and languages.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-11)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-09-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

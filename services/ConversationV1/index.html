@@ -594,119 +594,138 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <a href='#speech-to-text' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='speech-to-text'>Speech to Text</h2>
 
 <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.</p>
-<a href='#recorded-audio' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='recorded-audio'>Recorded Audio</h4>
 
-<p>The following example demonstrates how to use the Speech to Text service to transcribe an audio file.</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
+<p>The <code>SpeechToText</code> class is the SDK&rsquo;s primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the <code>SpeechToTextSession</code> class that exposes more control over the WebSockets session.</p>
+<a href='#recognition-request-settings' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='recognition-request-settings'>Recognition Request Settings</h4>
 
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<p>The <code>RecognitionSettings</code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml#WSstart">initating a request</a>.</p>
 
-<span class="c1">// load audio file</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">fileURL</span> <span class="o">=</span> <span class="kt">NSBundle</span><span class="o">.</span><span class="nf">mainBundle</span><span class="p">()</span><span class="o">.</span><span class="kt">URLForResource</span><span class="p">(</span><span class="s">"your-audio-filename"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"wav"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Audio file could not be loaded."</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-
-<span class="c1">// transcribe audio file</span>
-<span class="k">let</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">TranscriptionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">WAV</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">speechToText</span><span class="o">.</span><span class="nf">transcribe</span><span class="p">(</span><span class="n">fileURL</span><span class="p">,</span> <span class="nv">settings</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">last</span><span class="p">?</span><span class="o">.</span><span class="n">alternatives</span><span class="o">.</span><span class="n">last</span><span class="p">?</span><span class="o">.</span><span class="n">transcript</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-<a href='#streaming-audio' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='streaming-audio'>Streaming Audio</h4>
-
-<p>Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. (Please note that the microphone is inaccessible when testing applications with the iOS Simulator. Only applications on a physical device can access the microphone to stream audio to Speech to Text.)</p>
-
-<p>The following example demonstrates how to use the Speech to Text service with streaming audio:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
-
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-
-<span class="c1">// define transcription settings</span>
-<span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">TranscriptionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">L16</span><span class="p">(</span><span class="nv">rate</span><span class="p">:</span> <span class="mi">44100</span><span class="p">,</span> <span class="nv">channels</span><span class="p">:</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
+<p>The following example demonstrates how to define a recognition request that transcribes Opus-formatted audio data with interim results until the stream terminates:</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">WAV</span><span class="p">)</span>
 <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
-
-<span class="c1">// start streaming audio and print transcripts</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="k">let</span> <span class="nv">stopStreaming</span> <span class="o">=</span> <span class="n">speechToText</span><span class="o">.</span><span class="nf">transcribe</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">last</span><span class="p">?</span><span class="o">.</span><span class="n">alternatives</span><span class="o">.</span><span class="n">last</span><span class="p">?</span><span class="o">.</span><span class="n">transcript</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// Streaming will continue until either an end-of-speech event is detected by</span>
-<span class="c1">// the Speech to Text service or the `stopStreaming` function is executed.</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre>
-<a href='#custom-capture-sessions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='custom-capture-sessions'>Custom Capture Sessions</h4>
 
-<p>Advanced users who want to create and manage their own <code>AVCaptureSession</code> can construct an <code>AVCaptureAudioDataOutput</code> to stream audio to the Speech to Text service. This is particularly useful for users who would like to visualize an audio waveform, save audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.</p>
+<p>See the <a href="http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/details.shtml">service documentation</a> for more information about the available settings.</p>
+<a href='#microphone-audio-and-compression' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='microphone-audio-and-compression'>Microphone Audio and Compression</h4>
 
-<p>The following example demonstrates how to use an <code>AVCaptureSession</code> to stream audio to the Speech to Text service:</p>
+<p>The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as <code>recognizeMicrophone(settings:model:learningOptOut:compress:failure:success)</code> and <code>stopRecognizeMicrophone()</code> or <code>startMicrophone(compress:)</code> and <code>stopMicrophone()</code>).</p>
+
+<p>Knowing when to stop the microphone depends upon the recognition request&rsquo;s <code>continuous</code> setting:</p>
+
+<ul>
+<li><p>If <code>false</code>, then the service ends the recognition request at the first end-of-speech incident (denoted by a half-second of non-speech or when the stream terminates). This will coincide with a <code>final</code> transcription result. So the <code>success</code> or <code>onResults</code> callback should be configured to stop the microphone when a final transcription result is received.</p></li>
+<li><p>If <code>true</code>, then the microphone will typically be stopped by user-feedback. For example, your application may have a button to start/stop the request, or you may stream the microphone for the duration of a long press on a UI element.</p></li>
+</ul>
+
+<p>To reduce latency and bandwidth, the microphone audio is compressed to Opus format by default. To disable compression, set the <code>compress</code> parameter to <code>false</code>.</p>
+
+<p>It&rsquo;s important to specify the correct audio format for recognition requests that use the microphone:</p>
+<pre class="highlight swift"><code><span class="c1">// compressed microphone audio uses the Opus format</span>
+<span class="k">let</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">Opus</span><span class="p">)</span>
+
+<span class="c1">// uncompressed microphone audio uses a 16-bit mono PCM format at 16 kHz</span>
+<span class="k">let</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">L16</span><span class="p">(</span><span class="nv">rate</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span> <span class="nv">channels</span><span class="p">:</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre>
+<a href='#transcribe-recorded-audio' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='transcribe-recorded-audio'>Transcribe Recorded Audio</h4>
+
+<p>The following example demonstrates how to use the Speech to Text service to transcribe a WAV audio file.</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
 
-<span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
 
-    <span class="c1">// the capture session must not fall out of scope while in use</span>
-    <span class="k">var</span> <span class="nv">captureSession</span><span class="p">:</span> <span class="kt">AVCaptureSession</span><span class="p">?</span>
+<span class="k">let</span> <span class="nv">audio</span> <span class="o">=</span> <span class="kt">NSBundle</span><span class="o">.</span><span class="nf">mainBundle</span><span class="p">()</span><span class="o">.</span><span class="kt">URLForResource</span><span class="p">(</span><span class="s">"filename"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"wav"</span><span class="p">)</span><span class="o">!</span>
+<span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">WAV</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">speechToText</span><span class="o">.</span><span class="nf">recognize</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="nv">settings</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">bestTranscript</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#transcribe-microphone-audio' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='transcribe-microphone-audio'>Transcribe Microphone Audio</h4>
 
-    <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+<p>Audio can be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe microphone audio:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
 
-        <span class="c1">// create capture session</span>
-        <span class="n">captureSession</span> <span class="o">=</span> <span class="kt">AVCaptureSession</span><span class="p">()</span>
-        <span class="k">guard</span> <span class="k">let</span> <span class="nv">captureSession</span> <span class="o">=</span> <span class="n">captureSession</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
 
-        <span class="c1">// set microphone as a capture session input</span>
-        <span class="k">let</span> <span class="nv">microphoneDevice</span> <span class="o">=</span> <span class="kt">AVCaptureDevice</span><span class="o">.</span><span class="nf">defaultDeviceWithMediaType</span><span class="p">(</span><span class="kt">AVMediaTypeAudio</span><span class="p">)</span>
-        <span class="k">let</span> <span class="nv">microphoneInput</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">AVCaptureDeviceInput</span><span class="p">(</span><span class="nv">device</span><span class="p">:</span> <span class="n">microphoneDevice</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">captureSession</span><span class="o">.</span><span class="nf">canAddInput</span><span class="p">(</span><span class="n">microphoneInput</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">captureSession</span><span class="o">.</span><span class="nf">addInput</span><span class="p">(</span><span class="n">microphoneInput</span><span class="p">)</span>
-        <span class="p">}</span>
-
-        <span class="c1">// create Speech to Text object</span>
-        <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-        <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-        <span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-
-        <span class="c1">// define transcription settings</span>
-        <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">TranscriptionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">L16</span><span class="p">(</span><span class="nv">rate</span><span class="p">:</span> <span class="mi">44100</span><span class="p">,</span> <span class="nv">channels</span><span class="p">:</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
-        <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
-
-        <span class="c1">// create output for capture session</span>
-        <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-        <span class="k">let</span> <span class="nv">output</span> <span class="o">=</span> <span class="n">speechToText</span><span class="o">.</span><span class="nf">createTranscriptionOutput</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nv">transcription</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">last</span><span class="p">?</span><span class="o">.</span><span class="n">alternatives</span><span class="o">.</span><span class="n">last</span><span class="p">?</span><span class="o">.</span><span class="n">transcript</span> <span class="p">{</span>
-                <span class="nf">print</span><span class="p">(</span><span class="n">transcription</span><span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="k">let</span> <span class="nv">output</span> <span class="o">=</span> <span class="n">output</span> <span class="p">{</span>
-            <span class="k">let</span> <span class="nv">transcriptionOutput</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="mi">0</span>
-            <span class="k">let</span> <span class="nv">stopStreaming</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="mi">1</span>
-
-            <span class="c1">// set Speech to Text as a capture session output</span>
-            <span class="k">if</span> <span class="n">captureSession</span><span class="o">.</span><span class="nf">canAddOutput</span><span class="p">(</span><span class="n">transcriptionOutput</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">captureSession</span><span class="o">.</span><span class="nf">addOutput</span><span class="p">(</span><span class="n">transcriptionOutput</span><span class="p">)</span>
-            <span class="p">}</span>
-
-            <span class="c1">// add any custom capture session outputs here</span>
-
-            <span class="c1">// start capture session to stream audio</span>
-            <span class="n">captureSession</span><span class="o">.</span><span class="nf">startRunning</span><span class="p">()</span>
-        <span class="p">}</span>
+<span class="kd">func</span> <span class="nf">startStreaming</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">Opus</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="n">speechToText</span><span class="o">.</span><span class="nf">recognizeMicrophone</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">bestTranscript</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// Streaming will continue until either an end-of-speech event is detected by</span>
-<span class="c1">// the Speech to Text service, the `stopStreaming` function is executed, or</span>
-<span class="c1">// the capture session is stopped.</span>
+<span class="kd">func</span> <span class="nf">stopStreaming</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">speechToText</span><span class="o">.</span><span class="nf">stopRecognizeMicrophone</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#session-management-and-advanced-features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='session-management-and-advanced-features'>Session Management and Advanced Features</h4>
+
+<p>Advanced users may want more customizability than provided by the <code>SpeechToText</code> class. The <code>SpeechToTextSession</code> class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. Before using <code>SpeechToTextSession</code>, it&rsquo;s helpful to be familiar with the <a href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml">Speech to Text WebSocket interface</a>.</p>
+
+<p>The following steps describe how to execute a recognition request with <code>SpeechToTextSession</code>:</p>
+
+<ol>
+<li>Connect: Invoke <code>connect()</code> to connect to the service.</li>
+<li>Start Recognition Request: Invoke <code>startRequest(settings:)</code> to start a recognition request.</li>
+<li>Send Audio: Invoke <code>recognize(audio:)</code> or <code>startMicrophone(compress:)</code>/<code>stopMicrophone()</code> to send audio to the service.</li>
+<li>Stop Recognition Request: Invoke <code>stopRequest()</code> to end the recognition request. The service will automatically stop the request if the <code>continuous</code> setting is not set to <code>true</code>. If the recognition request is already stopped, then sending a stop message will have no effect.</li>
+<li>Disconnect: Invoke <code>disconnect()</code> to wait for any remaining results to be received and then disconnect from the service.</li>
+</ol>
+
+<p>All text and data messages sent by <code>SpeechToTextSession</code> are queued, with the exception of <code>connect()</code> which immediately connects to the server. The queue ensures that the messages are sent in-order and also buffers messages while waiting for a connection to be established. This behavior is generally transparent.</p>
+
+<p>A <code>SpeechToTextSession</code> also provides several (optional) callbacks. The callbacks can be used to learn about the state of the session or access microphone data.</p>
+
+<ul>
+<li><code>onConnect</code>: Invoked when the session connects to the Speech to Text service.</li>
+<li><code>onMicrophoneData</code>: Invoked with microphone audio when a recording audio queue buffer has been filled. If microphone audio is being compressed, then the audio data is in Opus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.</li>
+<li><code>onPowerData</code>: Invoked every 0.025s when recording with the average dB power of the microphone.</li>
+<li><code>onResults</code>: Invoked when transcription results are received for a recognition request.</li>
+<li><code>onError</code>: Invoked when an error or warning occurs.</li>
+<li><code>onDisconnect</code>: Invoked when the session disconnects from the Speech to Text service.</li>
+</ul>
+
+<p>The following example demonstrates how to use <code>SpeechToTextSession</code> to transcribe microphone audio:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">speechToTextSession</span> <span class="o">=</span> <span class="kt">SpeechToTextSession</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">startStreaming</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// define callbacks</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="n">onConnect</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"connected"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="n">onDisconnect</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"disconnected"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="n">onError</span> <span class="o">=</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="n">onPower</span> <span class="o">=</span> <span class="p">{</span> <span class="n">decibels</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">decibels</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="n">onMicrophoneData</span> <span class="o">=</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"received data"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="n">onResults</span> <span class="o">=</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">bestTranscript</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="c1">// define recognition request settings</span>
+    <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="kt">Opus</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
+
+    <span class="c1">// start streaming microphone audio for transcription</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">connect</span><span class="p">()</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">startRequest</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">startMicrophone</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">stopStreaming</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">stopMicrophone</span><span class="p">()</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">stopRequest</span><span class="p">()</span>
+    <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">disconnect</span><span class="p">()</span>
+<span class="p">}</span>
 </code></pre>
 <a href='#additional-information' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='additional-information'>Additional Information</h4>
 
@@ -897,7 +916,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-11)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-09-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
