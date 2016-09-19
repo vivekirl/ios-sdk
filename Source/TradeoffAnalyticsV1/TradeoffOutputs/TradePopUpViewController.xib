@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TradePopUpViewController" customModule="AKWatsonTradeOff" customModuleProvider="target">
+            <connections>
+                <outlet property="tblView" destination="liV-vN-mhd" id="SKa-tI-bSx"/>
+                <outlet property="view" destination="NHe-QL-uRN" id="n7F-S8-Xqh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="NHe-QL-uRN">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="liV-vN-mhd">
+                    <rect key="frame" x="8" y="35" width="584" height="524"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="F0L-Bj-PhJ"/>
+                        <outlet property="delegate" destination="-1" id="VSO-Ra-4CC"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="liV-vN-mhd" firstAttribute="trailing" secondItem="NHe-QL-uRN" secondAttribute="trailingMargin" id="4aM-ea-VZm"/>
+                <constraint firstItem="liV-vN-mhd" firstAttribute="top" secondItem="NHe-QL-uRN" secondAttribute="top" constant="35" id="HNJ-jF-V9d"/>
+                <constraint firstItem="liV-vN-mhd" firstAttribute="leading" secondItem="NHe-QL-uRN" secondAttribute="leadingMargin" id="Vh9-fB-4mf"/>
+                <constraint firstAttribute="bottom" secondItem="liV-vN-mhd" secondAttribute="bottom" constant="41" id="ggS-ct-T9V"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
